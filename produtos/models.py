@@ -25,8 +25,11 @@ class Estoque(models.Model):
         ("C", "Terceiro Corredor"),
     ]
 
-    prateleira = models.IntegerField(verbose_name="Prateleira",validators=[MinValueValidator(1),MaxValueValidator(5)])
-    nivel_prateleira = models.IntegerField(verbose_name="Prateleira", validators=[MinValueValidator(1), MaxValueValidator(5)])
+    produto = models.ForeignKey(
+        Produto,
+        on_delete = models.CASCADE,
+        verbose_name = "Produto"
+    )
 
     local = models.CharField(
         verbose_name = "Corredor",
@@ -34,11 +37,10 @@ class Estoque(models.Model):
         choices = CORREDOR_CHOICES,
         default = "0",
     )
-    produto = models.ForeignKey(
-        Produto,
-        on_delete = models.CASCADE,
-        verbose_name = "Produto"
-    )
+   
+
+    prateleira = models.IntegerField(verbose_name="Prateleira",validators=[MinValueValidator(1),MaxValueValidator(5)])
+    nivel_prateleira = models.IntegerField(verbose_name="Nível prateleira", validators=[MinValueValidator(1), MaxValueValidator(5)])
 
     class Meta:
         verbose_name = "Estoque"
