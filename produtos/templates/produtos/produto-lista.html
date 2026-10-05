@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static ' produtos/css/style.css' %}">
+    <title>Produtos</title>
+</head>
+
+<body>
+    <h1>Produtos</h1>
+
+    <ul>
+        {% for produto in Produtos %}
+        <li>{{produto.produto_nome}} | {{produto.produto_genero}}</li>
+        {% empty %}
+        <li>Nenhum produto cadastrado.</li>
+        {% endfor %}
+    </ul>
+
+    {% if is_paginated %}
+    <nav>
+        {% if page_obj.has_previous %}
+        <a href="{% querystring page=page_obj.previous_page_number %}">Anterior</a>
+        {% endif %}
+        <span> Página {{page_obj.number}} de {{page_obj.paginator.num_pages}}</span>
+        {% if page_obj.has_next %}
+        <a href="{% querystring page=page_obj.next_page_number %}">Próxima</a>
+        {% endif %}
+    </nav>
+
+    {% endif %}
+
+</body>
+
+</html>
