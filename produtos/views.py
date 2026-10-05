@@ -5,6 +5,6 @@ from produtos.models import Produto
 
 class ProdutoListView(ListView):
     model = Produto
-    template_name = "produtos/produto-lista.html"
+    template_name = "produtos/produtos.html"
     context_object_name = "Produtos"
     paginate_by = 10

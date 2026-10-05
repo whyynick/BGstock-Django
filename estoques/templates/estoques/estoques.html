@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'estoques/css/estoques_style.css' %}">
+    <title>Gerenciamento de Estoques</title>
+</head>
+
+<body>
+
+    <h1>Estoques</h1>
+
+    <ul>
+        {% for estoque in Estoques %}
+        <li>{{estoque.produto}} | Local no estoque: {{estoque.get_local_display}} | Número da prateleira:
+            {{estoque.prateleira}} |
+            Nível da prateleira: {{estoque.nivel_prateleira}}</li>
+        {% empty %}
+        <li> Nenhum estoque cadastrado.</li>
+        {% endfor %}
+    </ul>
+
+    {% if is_paginated %}
+    <nav>
+        {% if page_obj.has_previous %}
+        <a href="{% querystring page=page_obj.previous_page_number %}">Anterior</a>
+        {% endif %}
+        <span>Página {{ page_obj.number }} de {{page_obj.paginator.num_pages}}</span>
+
+        {% if page_obj.has_next %}
+        <a href="{querystring page=page_obj.next_page_number}">Próxima</a>
+        {% endif %}
+    </nav>
+    {% endif %}
+
+</body>
+
+</html>

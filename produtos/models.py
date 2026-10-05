@@ -11,43 +11,8 @@ class Produto(models.Model):
 
     class Meta:
         verbose_name = "Produto"
-        verbose_name_plural = "Produtos"
+        verbose_name_plural = "Gerenciador de Produtos"
         ordering = ["produto_nome"]
     
     def __str__(self):
-        return f"{self.produto_nome} {self.produto_genero}"
-
-class Estoque(models.Model):
-    CORREDOR_CHOICES = [
-        ("0", "Área de Manuseio"),
-        ("A", "Primeiro Corredor"),
-        ("B", "Segundo Corredor"),
-        ("C", "Terceiro Corredor"),
-    ]
-
-    produto = models.ForeignKey(
-        Produto,
-        on_delete = models.CASCADE,
-        verbose_name = "Produto"
-    )
-
-    local = models.CharField(
-        verbose_name = "Corredor",
-        max_length = 1,
-        choices = CORREDOR_CHOICES,
-        default = "0",
-    )
-   
-
-    prateleira = models.IntegerField(verbose_name="Prateleira",validators=[MinValueValidator(1),MaxValueValidator(5)])
-    nivel_prateleira = models.IntegerField(verbose_name="Nível prateleira", validators=[MinValueValidator(1), MaxValueValidator(5)])
-
-    class Meta:
-        verbose_name = "Estoque"
-        verbose_name_plural = "Estoques"
-        ordering = ["prateleira"]
-
-    def __str__(self):
-        return f"Prateleira{self.prateleira} - {self.local}"
-    
-
+        return (f"Nome do item: {self.produto_nome} | Gênero do item: {self.produto_genero}")
