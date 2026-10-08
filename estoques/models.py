@@ -1,6 +1,7 @@
 from django.db import models
 from produtos.models import Produto
 from django.core.validators import MaxValueValidator, MinValueValidator
+
 # Create your models here.
 
 class Estoque(models.Model):
@@ -35,4 +36,3 @@ class Estoque(models.Model):
 
     def __str__(self):
         return f"Prateleira{self.prateleira} - {self.local}"
-    

@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'estoques/css/estoques_style.css' %}">
+    <link rel="stylesheet" href="{% static 'estoques/css/estoques_list.css' %}">
     <title>Gerenciamento de Estoques</title>
 </head>
 
@@ -18,7 +18,9 @@
         {% for estoque in Estoques %}
         <li>{{estoque.produto}} | Local no estoque: {{estoque.get_local_display}} | Número da prateleira:
             {{estoque.prateleira}} |
-            Nível da prateleira: {{estoque.nivel_prateleira}}</li>
+            Nível da prateleira: {{estoque.nivel_prateleira}}
+            <a href="{% url 'estoques:estoque_update' estoque.pk %}">editar</a>
+        </li>
         {% empty %}
         <li> Nenhum estoque cadastrado.</li>
         {% endfor %}
@@ -32,7 +34,7 @@
         <span>Página {{ page_obj.number }} de {{page_obj.paginator.num_pages}}</span>
 
         {% if page_obj.has_next %}
-        <a href="{querystring page=page_obj.next_page_number}">Próxima</a>
+        <a href="{% querystring page=page_obj.next_page_number %}">Próxima</a>
         {% endif %}
     </nav>
     {% endif %}

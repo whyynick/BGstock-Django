@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'estoques/css/estoques_form.css' %}">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>Editar {{ estoque }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Salvar</button>
+        <a href="{% url 'estoques:estoque_list' %}">Cancelar</a>
+    </form>
+
+</body>
+
+</html>

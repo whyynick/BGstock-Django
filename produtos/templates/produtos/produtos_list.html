@@ -13,8 +13,9 @@
     <h1>Gerenciamento de Produtos</h1>
 
     <ul>
-        {% for produto in Produtos %}
+        {% for produto in produtos %}
         <li>{{produto.produto_nome}} | {{produto.produto_genero}}</li>
+        <a href="{% url 'produtos:produtos_update' produto.pk %}">Editar</a>
         {% empty %}
         <li>Nenhum produto cadastrado.</li>
         {% endfor %}
