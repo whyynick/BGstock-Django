@@ -5,6 +5,6 @@ from django.urls import path, include
 app_name = "estoques"
 
 urlpatterns = [
-   path("estoques/", EstoqueListView.as_view(), name="estoque_list"),
+   path("estoques/", EstoqueListView.as_view(), name="estoques_list"),
    path("estoques/<int:pk>/editar/", EstoqueUpdateView.as_view(), name= "estoque_update"),
 ]

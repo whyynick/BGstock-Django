@@ -18,5 +18,5 @@ class EstoqueUpdateView(LoginRequiredMixin, UpdateView):
     form_class = EstoqueForm
     template_name = "estoques/estoques_form.html"
     context_object_name = "estoque"
-    success_url = reverse_lazy("estoques:estoque_list")
+    success_url = reverse_lazy("estoques:estoques_list")
     login_url = reverse_lazy("admin:login")
