@@ -1,39 +1,33 @@
+{% extends "base.html" %}
+
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-BR">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'produtos/css/produtos_style.css' %}">
-    <title>Produtos</title>
-</head>
+{% block title %}Produtos - BGstock{% endblock %}
 
-<body>
-    <h1>Gerenciamento de Produtos</h1>
 
-    <ul>
-        {% for produto in produtos %}
-        <li>{{produto.produto_nome}} | {{produto.produto_genero}}</li>
-        <a href="{% url 'produtos:produtos_update' produto.pk %}">Editar</a>
-        {% empty %}
-        <li>Nenhum produto cadastrado.</li>
-        {% endfor %}
-    </ul>
+{% block content %}
+<h1>Gerenciamento de Produtos</h1>
 
-    {% if is_paginated %}
-    <nav>
-        {% if page_obj.has_previous %}
-        <a href="{% querystring page=page_obj.previous_page_number %}">Anterior</a>
-        {% endif %}
-        <span> Página {{page_obj.number}} de {{page_obj.paginator.num_pages}}</span>
-        {% if page_obj.has_next %}
-        <a href="{% querystring page=page_obj.next_page_number %}">Próxima</a>
-        {% endif %}
-    </nav>
+<ul>
+    {% for produto in produtos %}
+    <li>{{produto.produto_nome}} | {{produto.produto_genero}}</li>
+    <a href="{% url 'produtos:produtos_update' produto.pk %}">Editar</a>
+    {% empty %}
+    <li>Nenhum produto cadastrado.</li>
+    {% endfor %}
+</ul>
 
+{% if is_paginated %}
+<nav>
+    {% if page_obj.has_previous %}
+    <a href="{% querystring page=page_obj.previous_page_number %}">Anterior</a>
     {% endif %}
+    <span> Página {{page_obj.number}} de {{page_obj.paginator.num_pages}}</span>
+    {% if page_obj.has_next %}
+    <a href="{% querystring page=page_obj.next_page_number %}">Próxima</a>
+    {% endif %}
+</nav>
 
-</body>
+{% endif %}
 
-</html>
+{% endblock %}

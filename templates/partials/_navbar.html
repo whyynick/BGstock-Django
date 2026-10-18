@@ -1,0 +1,8 @@
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a href="{%url 'produtos:produtos_list' %}" class="navbar-brand">BGstock</a>
+        {% if user.is_authenticated %}
+        <span class="navbar-text text-white">Olá, {{user.username}}</span>
+        {% endif %}
+    </div>
+</nav>
