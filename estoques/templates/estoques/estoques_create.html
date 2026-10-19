@@ -1,0 +1,16 @@
+{%extends "base.html"%}
+
+{%block title%}Adicionar Estoque{%endblock%}
+
+{%block content%}
+
+<h1>Aloque um produto a um local do estoque</h1>
+
+<form method="post">
+    {%csrf_token%}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-primary btn-sm">Criar</button>
+    <a href="{% url 'estoques:estoques_list' %}" class="btn btn btn-secondary btn-sm">Cancelar</a>
+</form>
+
+{%endblock%}

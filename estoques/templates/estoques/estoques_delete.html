@@ -1,0 +1,12 @@
+{%extends "base.html"%}
+
+{%block title%}Deletar Produto de Estoque{%endblock%}
+
+{%block content%}
+<h2>Remover alocação do produto {{Estoque.produto.produto_nome}} no estoque.</h2>
+<form method="post">
+    {%csrf_token%}
+    <a href="{% url 'estoques:estoques_list' %}" class="btn btn-secondary">Cancelar</a>
+    <button type="submit" class="btn btn-danger">Remover</button>
+</form>
+{%endblock%}

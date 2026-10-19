@@ -7,11 +7,14 @@
 
 <ul>
     {% for estoque in Estoques %}
-    <li>{{estoque.produto}} | Local no estoque: {{estoque.get_local_display}} | Número da prateleira:
-        {{estoque.prateleira}} |
-        Nível da prateleira: {{estoque.nivel_prateleira}}
-        <a href="{% url 'estoques:estoque_update' estoque.pk %}">editar</a>
+    <li>
+        {{estoque.produto}}
     </li>
+    <li>Local no estoque: {{estoque.get_local_display}}</li>
+    <li>Número da prateleira:{{estoque.prateleira}} | Nível da prateleira: {{estoque.nivel_prateleira}}</li>
+
+    <a href="{% url 'estoques:estoque_update' estoque.pk %}" class="btn btn-sm btn-primary">Editar</a>
+    <a href="{% url 'estoques:estoque_delete' estoque.pk %}" class="btn btn-sm btn-danger">Deletar</a>
     {% empty %}
     <li> Nenhum estoque cadastrado.</li>
     {% endfor %}
@@ -29,5 +32,6 @@
     {% endif %}
 </nav>
 {% endif %}
+<a href="{% url 'estoques:estoque_create' %}" class="btn btn-success btn-sm mb-3">Criar estoque</a>
 
 {% endblock %}
