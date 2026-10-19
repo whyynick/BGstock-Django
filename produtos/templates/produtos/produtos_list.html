@@ -8,14 +8,18 @@
 {% block content %}
 <h1>Gerenciamento de Produtos</h1>
 
+<h2>Produtos</h2>
+
 <ul>
     {% for produto in produtos %}
     <li>{{produto.produto_nome}} | {{produto.produto_genero}}</li>
-    <a href="{% url 'produtos:produtos_update' produto.pk %}">Editar</a>
+    <a href="{% url 'produtos:produtos_update' produto.pk %}" class="btn btn-sm btn-primary">Editar</a>
+    <a href="{% url 'produtos:produtos_delete' produto.pk %}" class="btn btn-sm btn-danger">Excluir</a>
     {% empty %}
     <li>Nenhum produto cadastrado.</li>
     {% endfor %}
 </ul>
+<a href="{% url 'produtos:produtos_create' %}" class="btn btn-success btn-sm">Novo Produto</a>
 
 {% if is_paginated %}
 <nav>

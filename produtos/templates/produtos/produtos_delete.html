@@ -1,0 +1,12 @@
+{%extends "base.html"%}
+{%load static%}
+
+{%block title%}Deletar Produto{%endblock%}
+
+{%block content%}
+<h1>Deletar produto {{ produto.produto_nome }} </h1>
+<form method="post">
+    {%csrf_token%}
+    <button type="submit" class="btn btn-danger">Deletar</button>
+</form>
+{%endblock%}
