@@ -7,6 +7,8 @@
 <h1>Deletar produto {{ produto.produto_nome }} </h1>
 <form method="post">
     {%csrf_token%}
-    <button type="submit" class="btn btn-danger">Deletar</button>
+    <a href="{% url 'produtos:produtos_list' %}" class="btn btn-sm btn-secondary">Cancelar</a>
+    <button type="submit" class="btn btn-sm btn-danger">Deletar</button>
 </form>
+
 {%endblock%}
