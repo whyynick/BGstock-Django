@@ -1,8 +1,19 @@
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
-        <a href="{%url 'produtos:produtos_list' %}" class="navbar-brand">BGstock</a>
-        {% if user.is_authenticated %}
-        <span class="navbar-text text-white">Olá, {{user.username}}</span>
-        {% endif %}
+        <a href="{% url 'produtos:produtos_list' %}" class="navbar-brand">BGstock</a>
+
+        <div class="d-flex align-items-center">
+            {% if user.is_authenticated %}
+            <span class="navbar-text text-white me-3">Olá, {{ user.username }}</span>
+
+            <!-- Formulário de Logout via POST -->
+            <form action="{% url 'accounts:logout' %}" method="post" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-light btn-sm">Sair</button>
+            </form>
+            {% else %}
+            <a href="{% url 'accounts:login' %}" class="btn btn-outline-light btn-sm">Entrar</a>
+            {% endif %}
+        </div>
     </div>
 </nav>

@@ -1,0 +1,19 @@
+{%extends "base.html"%}
+
+{%block title%}Cadastre-se{%endblock%}
+
+{%block content%}
+
+<h1>Cadastre-se</h1>
+
+<form method="post">
+    {%csrf_token%}
+
+    {{form.as_p}}
+
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+</form>
+
+<a href="{% url 'accounts:login'%}" class="btn btn-outline-secondary">Já sou cadastrado</a>
+
+{%endblock%}
