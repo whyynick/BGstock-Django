@@ -8,6 +8,11 @@
 {% block content %}
 <h1>Gerenciamento de Produtos</h1>
 
+<form action="{% url 'accounts:logout' %}" method="post">
+    {%csrf_token%}
+    <button type="submit" class="btn btn-sm btn-outline-secondary">Sair</button>
+</form>
+
 <h2>Produtos</h2>
 
 <ul>
@@ -19,7 +24,12 @@
     <li>Nenhum produto cadastrado.</li>
     {% endfor %}
 </ul>
+
+{% if perms.produtos.add_produto %}
+
 <a href="{% url 'produtos:produtos_create' %}" class="btn btn-success btn-sm">Novo Produto</a>
+
+{%endif%}
 
 {% if is_paginated %}
 <nav>

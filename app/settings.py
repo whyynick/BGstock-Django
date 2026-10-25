@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
+from django.conf.global_settings import LOGOUT_REDIRECT_URL
+from django.conf.global_settings import LOGIN_REDIRECT_URL
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -270,3 +272,7 @@ JAZZMIN_SETTINGS = {
     # Add a language dropdown into the admin
     "language_chooser": False,
  }
+
+LOGIN_URL = "accounts:login"
+LOGIN_REDIRECT_URL = "produts:produtos_list"
+LOGOUT_REDIRECT_URL = "accounts:login"

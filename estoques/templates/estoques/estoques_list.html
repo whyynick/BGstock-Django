@@ -32,6 +32,11 @@
     {% endif %}
 </nav>
 {% endif %}
+
+{%if perms.estoques.add_estoque%}
+
 <a href="{% url 'estoques:estoque_create' %}" class="btn btn-success btn-sm mb-3">Criar estoque</a>
+
+{%endif%}
 
 {% endblock %}
