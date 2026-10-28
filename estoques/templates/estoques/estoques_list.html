@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{%block title%}Estoques - BGstock{%endblock%}
+
 {% block content %}
 
 <h1>Gerenciamento de Estoques</h1>
@@ -15,7 +17,7 @@
                 <strong>Estoque {{ forloop.counter }}</strong> — {{ estoque.produto.produto_nome }}
             </div>
             <div>
-                <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse"
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="collapse"
                     data-bs-target="#detalhe-{{ estoque.pk }}">
                     Ver Detalhes
                 </button>
@@ -40,18 +42,41 @@
 
 
 {% if is_paginated %}
-<nav>
-    {% if page_obj.has_previous %}
-    <a href=" {% querystring page=page_obj.previous_page_number %}">Anterior</a>
-    {% endif %}
-    <span>Página {{ page_obj.number }} de {{page_obj.paginator.num_pages}}</span>
+<nav aria-label="Navegação de páginas" class="mt-4">
+    <ul class="pagination pagination-sm">
 
-    {% if page_obj.has_next %}
-    <a href="{% querystring page=page_obj.next_page_number %}">Próxima</a>
-    {% endif %}
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link"
+                href="{% querystring page=page_obj.previous_page_number %}">Anterior</a>
+        </li>
+        {% endif %}
+
+        {%for num in page_obj.paginator.page_range%}
+        {%if page_obj.number == num %}
+        <li class="page-item active" aria-current="page">
+            <span class="page-link">
+                {{num}}
+            </span>
+        </li>
+        {%else%}
+        <li class="page-item">
+            <a href="{%querystring page=num %}" class="page-link">{{num}}</a>
+        </li>
+        {%endif%}
+        {%endfor%}
+
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a href="{%querystring page=page_obj.next_page_number%}" class="page-link">Próxima</a>
+        </li>
+        {%else%}
+        <li class="page-item disabled">
+            <span class="page-link">Próxima</span>
+        </li>
+        {%endif%}
+    </ul>
 </nav>
-{% endif %}
-
+{%endif%}
 {%if perms.estoques.add_estoque%}
 
 <a href="{% url 'estoques:estoque_create' %}" class="btn btn-success btn-sm mt-3">Criar estoque</a>

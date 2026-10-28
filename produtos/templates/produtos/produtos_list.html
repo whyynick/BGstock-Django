@@ -10,13 +10,20 @@
 
 <h2>Produtos</h2>
 
-<ul>
+<ul class="list-group mb-3">
     {% for produto in produtos %}
-    <li>{{produto.produto_nome}} | {{produto.produto_genero}}</li>
-    <a href="{% url 'produtos:produtos_update' produto.pk %}" class="btn btn-sm btn-primary">Editar</a>
-    <a href="{% url 'produtos:produtos_delete' produto.pk %}" class="btn btn-sm btn-danger">Excluir</a>
+    <li class="list-group-item d-flex justify-content-between align-items-right">
+        {{produto.produto_nome}} | {{produto.produto_genero}}
+
+        <div class="d-flex gap-2">
+            <a href="{% url 'produtos:produtos_update' produto.pk %}" class="btn btn-sm btn-primary"
+                style="width: 4rem; height: 1.8rem;">Editar</a>
+            <a href="{% url 'produtos:produtos_delete' produto.pk %}" class="btn btn-sm btn-danger"
+                style="width: 4rem; height: 1.8rem;">Excluir</a>
+        </div>
+    </li>
     {% empty %}
-    <li>Nenhum produto cadastrado.</li>
+    <li class="list-group-item text-muted">Nenhum produto cadastrado.</li>
     {% endfor %}
 </ul>
 
@@ -27,16 +34,39 @@
 {%endif%}
 
 {% if is_paginated %}
-<nav>
-    {% if page_obj.has_previous %}
-    <a href="{% querystring page=page_obj.previous_page_number %}">Anterior</a>
-    {% endif %}
-    <span> Página {{page_obj.number}} de {{page_obj.paginator.num_pages}}</span>
-    {% if page_obj.has_next %}
-    <a href="{% querystring page=page_obj.next_page_number %}">Próxima</a>
-    {% endif %}
+<nav aria-label="Navegação de páginas" class="mt-4">
+    <ul class="pagination pagination-sm">
+
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link"
+                href="{% querystring page=page_obj.previous_page_number %}">Anterior</a>
+        </li>
+        {% endif %}
+
+        {%for num in page_obj.paginator.page_range%}
+        {%if page_obj.number == num %}
+        <li class="page-item active" aria-current="page">
+            <span class="page-link">
+                {{num}}
+            </span>
+        </li>
+        {%else%}
+        <li class="page-item">
+            <a href="{%querystring page=num %}" class="page-link">{{num}}</a>
+        </li>
+        {%endif%}
+        {%endfor%}
+
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a href="{%querystring page=page_obj.next_page_number%}" class="page-link">Próxima</a>
+        </li>
+        {%else%}
+        <li class="page-item disabled">
+            <span class="page-link">Próxima</span>
+        </li>
+        {%endif%}
+    </ul>
 </nav>
-
-{% endif %}
-
-{% endblock %}
+{%endif%}
+{%endblock%}
